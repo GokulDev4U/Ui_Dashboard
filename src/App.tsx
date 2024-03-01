@@ -1,11 +1,15 @@
 import { Link, Route, Routes } from "react-router-dom";
 import "./App.css";
-import Home from "./pages/Home";
+// import Home from "./pages/Home";
 import Header from "./components/Header";
 import SideBar from "./components/SideBar";
 import CustomTable from "./components/CustomTable";
-import EventName from "./pages/EventName";
+// import EventName from "./pages/EventName";
 import { GridColDef } from "@mui/x-data-grid";
+import { Suspense, lazy } from "react";
+
+const Home = lazy(() => import("./pages/Home"));
+const EventName = lazy(() => import("./pages/EventName"));
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", headerClassName: "white-text", cellClassName: "white-text", width: 90 },
@@ -104,20 +108,30 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={<Home />}
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <Home />
+                </Suspense>
+              }
             />
             <Route
               path="/new-request"
               element={
-                <CustomTable
-                  rows={rows}
-                  columns={columns}
-                />
+                <Suspense fallback={<div>Loading...</div>}>
+                  <CustomTable
+                    rows={rows}
+                    columns={columns}
+                  />
+                </Suspense>
               }
             />
             <Route
               path="/new-request/:eventName"
-              element={<EventName />}
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <EventName />
+                </Suspense>
+              }
             />
           </Routes>
         </div>
