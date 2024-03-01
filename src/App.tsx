@@ -92,7 +92,7 @@ const rows = [
 
 function App() {
   return (
-    <div className="app">
+    <div className="app gradientBackground">
       <div className="header">
         <Header />
       </div>

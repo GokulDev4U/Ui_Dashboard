@@ -1,15 +1,14 @@
-import { Button } from '@mui/material'
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react';
+import { Button } from '@mui/material';
 
-const CommonButton = ({children}) => {
-  // const pinkButtonStyle = {
-  //   color: 'pink', 
-  //   borderColor: 'pink', 
-  //   marginBottom:  '5px',
-  // };
-  const [isClicked, setIsClicked] = useState(false);
+interface CommonButtonProps {
+  children: React.ReactNode;
+}
 
-  const buttonStyle = {
+const CommonButton: FC<CommonButtonProps> = ({ children }) => {
+  const [isClicked, setIsClicked] = useState<boolean>(false);
+
+  const buttonStyle: React.CSSProperties = {
     color: isClicked ? 'pink' : 'white',
     borderColor: isClicked ? 'pink' : 'transparent',
     marginBottom: '5px',
@@ -20,8 +19,10 @@ const CommonButton = ({children}) => {
   };
 
   return (
-    <Button variant="outlined"  style={buttonStyle} onClick={handleClick}>{children}</Button>
-  )
-}
+    <Button variant="outlined" style={buttonStyle} onClick={handleClick}>
+      {children}
+    </Button>
+  );
+};
 
-export default CommonButton
+export default CommonButton;
